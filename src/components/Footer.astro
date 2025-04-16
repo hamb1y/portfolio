@@ -1,0 +1,30 @@
+---
+import { config } from '../config';
+
+const socialLinks = [
+  { name: 'GitHub', url: config.social.github, icon: 'fab fa-github' },
+  { name: 'Discord', url: config.social.discord, icon: 'fab fa-discord' },
+  { name: 'Bluesky', url: config.social.bluesky, icon: 'fas fa-cloud' },
+  { name: 'YouTube', url: config.social.youtube, icon: 'fab fa-youtube' }
+];
+---
+
+<footer>
+  <div class="container">
+    <div class="social-links">
+      {socialLinks.map(link => (
+        <a 
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class={link.icon}></i>
+          <span class="sr-only">{link.name}</span>
+        </a>
+      ))}
+    </div>
+    <div class="copyright">
+      <p>&copy; {new Date().getFullYear()} {config.name}. All rights reserved. Online Usernames: Hamb_y, Hamb1y, @hamb_y, Hamb_y#1078, Hamb1y2348, @hamb1y, @hamb_y1078</p>
+    </div>
+  </div>
+</footer>

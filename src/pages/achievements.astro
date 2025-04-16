@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { config } from '../config';
+
+const achievementsByType = config.achievements.reduce((acc, achievement) => {
+  const type = achievement['achievement-type'] || 'personal';
+  if (!acc[type]) {
+    acc[type] = [];
+  }
+  acc[type].push(achievement);
+  return acc;
+}, {});
+
+// Sort achievement types by their order
+const sortedAchievementTypes = [...config.achievementTypes].sort((a, b) => a.order - b.order);
+---
+
+<Layout title="Achievements">
+  <div class="container section">
+    <h1 class="section-title">Achievements</h1>
+    
+    {sortedAchievementTypes.map((achievementType) => (
+      <section id={achievementType.id} class="achievement-section achievement-text">
+        <h2 class="achievement-title">{achievementType.title}</h2>
+        <div class="achievement-list">
+          {achievementsByType[achievementType.id]?.map((achievement) => (
+            <div class="achievement-card">
+              <div class="achievement-content">
+                <div class="achievement-image">
+                  <img
+                    src={achievement.image}
+                    alt={achievement.title}
+                  />
+                </div>
+                <div class="achievement-text">
+                  <h2>{achievement.title}</h2>
+                  <p>{achievement.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</Layout>

@@ -1,0 +1,33 @@
+---
+import { config } from '../config';
+import ThemeToggle from './ThemeToggle.astro';
+
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Achievements', path: '/achievements' },
+  { name: 'Projects', path: '/projects' }
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header>
+  <nav>
+    <div class="container nav-content">
+      <a href="/" class="brand">{config.name}</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          {navItems.map(item => (
+            <a
+              href={item.path}
+              class={currentPath === item.path ? 'active' : ''}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+        <ThemeToggle />
+      </div>
+    </div>
+  </nav>
+</header>

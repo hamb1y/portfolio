@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { config } from '../config';
+---
+
+<Layout title="Projects">
+  <div class="container section">
+    <h1 class="section-title">Projects</h1>
+    <div class="projects-page-grid">
+      {config.projects.map((project: any) => (
+        <div id={project.id} class="project-page-card">
+          <h2>{project.title}</h2>
+          <p>{project.description}</p>
+          <div class="tech-tags">
+            {project.technologies.map((tech: string) => (
+              <span class="tech-tag">{tech}</span>
+            ))}
+          </div>
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project →
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

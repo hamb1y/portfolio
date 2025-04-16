@@ -1,0 +1,24 @@
+---
+import Layout from './Layout.astro';
+import '../pages/projects/styles.css';
+
+const { frontmatter } = Astro.props;
+import { config } from '../config';
+---
+
+<Layout title={frontmatter.title}>
+  <article class="project-content">
+    <div class="project-header">
+      <h1 class="project-title">{frontmatter.title}</h1>
+      <p class="project-description">{frontmatter.description}</p>
+      <div class="project-tech-stack">
+        {frontmatter.technologies.map((tech: string) => (
+          <span class="project-tech">{tech}</span>
+        ))}
+      </div>
+    </div>
+    <div class="mdx-content">
+      <slot />
+    </div>
+  </article>
+</Layout>
