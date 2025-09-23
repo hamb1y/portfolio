@@ -1,25 +1,68 @@
 backend:
   name: git-gateway
-  branch: main # or your default branch
+  branch: main
 
-# Media settings (all uploads go inside public/images, published as /images)
 media_folder: "public/images"
 public_folder: "/images"
 
 collections:
-  - name: "projects"        # used in routes: /admin/collections/projects
-    label: "Projects"       # shown in the CMS UI
-    folder: "src/pages/projects"   # path to your .mdx files
-    extension: "mdx"        # ensure files are saved as .mdx
-    format: "frontmatter"   # YAML frontmatter + body
-    create: true            # allow new files to be created
-    slug: "{{slug}}"        # filename template (slugified title)
+  # ---- 1) Info Cards (nested subtypes) ----
+  - name: "infos"
+    label: "Infos"
+    folder: "src/pages/infos"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    nested:
+      depth: 5         # allows /infos/<subtype>/<name>.md
+      summary: "{{title}}"
     fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/ProjectLayout.astro" }
+      - { label: "Name",  name: "name",  widget: "string" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
-      - label: "Technologies"
-        name: "technologies"
-        widget: "list"
-        field: { label: "Technology", name: "tech", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+
+  # ---- 2) Social ----
+  - name: "social"
+    label: "Social"
+    label_singular: "Social Link"
+    folder: "src/pages/social"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Platform", name: "platform", widget: "string" }   # e.g., GitHub
+      - { label: "URL", name: "url", widget: "string" }
+      - { label: "Username / Handle", name: "username", widget: "string", required: false }
+      - { label: "Icon (emoji or short text)", name: "icon", widget: "string", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+
+  # ---- 3) Skills ----
+  - name: "skills"
+    label: "Skills"
+    label_singular: "Skill"
+    folder: "src/pages/skills"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - label: "Level"
+        name: "level"
+        widget: "select"
+        options: ["Beginner", "Intermediate", "Advanced", "A lot"]
+
+  # ---- 4) Hobbies ----
+  - name: "hobbies"
+    label: "Hobbies"
+    label_singular: "Hobby"
+    folder: "src/pages/hobbies"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }   # can include emoji
+      - { label: "Description", name: "description", widget: "text", required: false }

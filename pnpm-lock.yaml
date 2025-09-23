@@ -17,6 +17,9 @@ importers:
       astro:
         specifier: ^4.0.0
         version: 4.16.18(@types/node@22.14.1)(rollup@4.40.0)(typescript@5.8.3)
+      npm:
+        specifier: ^11.6.0
+        version: 11.6.0
       playwright:
         specifier: ^1.51.1
         version: 1.51.1
@@ -1440,6 +1443,78 @@ packages:
 
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
+
+  npm@11.6.0:
+    resolution: {integrity: sha512-d/P7DbvYgYNde9Ehfeq99+13/E7E82PfZPw8uYZASr9sQ3ZhBBCA9cXSJRA1COfJ6jDLJ0K36UJnXQWhCvLXuQ==}
+    engines: {node: ^20.17.0 || >=22.9.0}
+    hasBin: true
+    bundledDependencies:
+      - '@isaacs/string-locale-compare'
+      - '@npmcli/arborist'
+      - '@npmcli/config'
+      - '@npmcli/fs'
+      - '@npmcli/map-workspaces'
+      - '@npmcli/package-json'
+      - '@npmcli/promise-spawn'
+      - '@npmcli/redact'
+      - '@npmcli/run-script'
+      - '@sigstore/tuf'
+      - abbrev
+      - archy
+      - cacache
+      - chalk
+      - ci-info
+      - cli-columns
+      - fastest-levenshtein
+      - fs-minipass
+      - glob
+      - graceful-fs
+      - hosted-git-info
+      - ini
+      - init-package-json
+      - is-cidr
+      - json-parse-even-better-errors
+      - libnpmaccess
+      - libnpmdiff
+      - libnpmexec
+      - libnpmfund
+      - libnpmorg
+      - libnpmpack
+      - libnpmpublish
+      - libnpmsearch
+      - libnpmteam
+      - libnpmversion
+      - make-fetch-happen
+      - minimatch
+      - minipass
+      - minipass-pipeline
+      - ms
+      - node-gyp
+      - nopt
+      - normalize-package-data
+      - npm-audit-report
+      - npm-install-checks
+      - npm-package-arg
+      - npm-pick-manifest
+      - npm-profile
+      - npm-registry-fetch
+      - npm-user-validate
+      - p-map
+      - pacote
+      - parse-conflict-json
+      - proc-log
+      - qrcode-terminal
+      - read
+      - semver
+      - spdx-expression-parse
+      - ssri
+      - supports-color
+      - tar
+      - text-table
+      - tiny-relative-date
+      - treeverse
+      - validate-npm-package-name
+      - which
 
   onetime@7.0.0:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
@@ -3934,6 +4009,8 @@ snapshots:
       '@types/nlcst': 2.0.3
 
   node-releases@2.0.19: {}
+
+  npm@11.6.0: {}
 
   onetime@7.0.0:
     dependencies:
