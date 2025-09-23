@@ -17,6 +17,9 @@ importers:
       astro:
         specifier: ^4.0.0
         version: 4.16.18(@types/node@22.14.1)(rollup@4.40.0)(typescript@5.8.3)
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
       npm:
         specifier: ^11.6.0
         version: 11.6.0
