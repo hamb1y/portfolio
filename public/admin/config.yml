@@ -1,0 +1,25 @@
+backend:
+  name: git-gateway
+  branch: main # or your default branch
+
+# Media settings (all uploads go inside public/images, published as /images)
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "projects"        # used in routes: /admin/collections/projects
+    label: "Projects"       # shown in the CMS UI
+    folder: "src/pages/projects"   # path to your .mdx files
+    extension: "mdx"        # ensure files are saved as .mdx
+    format: "frontmatter"   # YAML frontmatter + body
+    create: true            # allow new files to be created
+    slug: "{{slug}}"        # filename template (slugified title)
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/ProjectLayout.astro" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Technologies"
+        name: "technologies"
+        widget: "list"
+        field: { label: "Technology", name: "tech", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
