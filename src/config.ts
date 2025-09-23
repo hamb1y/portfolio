@@ -1,77 +1,34 @@
-import matter from "gray-matter";
+import { parseMarkdownCollection, sortByFrontmatterOrder } from "./lib/content";
 
 export type SkillLevel = "Beginner" | "Intermediate" | "Advanced" | "A lot";
 
-export type InfoCard = {
+type InfoFrontmatter = {
   name: string;
   title: string;
   description: string;
+  order?: number;
 };
 
-export type SocialLink = {
+type SocialFrontmatter = {
   platform: string;
   url: string;
   username?: string;
   icon?: string;
   featured?: boolean;
+  order?: number;
 };
 
-export type Skill = {
+type SkillFrontmatter = {
   name: string;
   level: SkillLevel;
+  order?: number;
 };
 
-export type Hobby = {
+type HobbyFrontmatter = {
   title: string;
   description?: string;
+  order?: number;
 };
-
-export type Project = {
-  id: string;
-  title: string;
-  description: string;
-  technologies: string[];
-  link: string;
-  featured?: boolean;
-};
-
-export type Achievement = {
-  title: string;
-  description: string;
-  featured: boolean;
-  image: string;
-  "achievement-type": string;
-  "achievement-id": string;
-};
-
-export type AchievementType = {
-  id: string;
-  title: string;
-  order: number;
-};
-
-type ParsedEntry<T> = T & { path: string };
-type SluggedEntry<T> = T & { slug: string };
-
-function parseFrontmatter<T>(files: Record<string, string>): ParsedEntry<T>[] {
-  return Object.entries(files).map(([path, raw]) => {
-    const { data } = matter(raw);
-    return { ...(data as T), path } as ParsedEntry<T>;
-  });
-}
-
-function slugFromPath(path: string): string {
-  const filename = path.split("/").pop() ?? "";
-  return filename.replace(/\.[^.]+$/, "");
-}
-
-const toSluggedEntry = <T>(entry: ParsedEntry<T>): SluggedEntry<T> => ({
-  ...entry,
-  slug: slugFromPath(entry.path),
-});
-
-const sortBySlug = <T extends { slug: string }>(a: T, b: T) =>
-  a.slug.localeCompare(b.slug);
 
 const infoFiles = import.meta.glob<string>("/src/pages/infos/**/*.md", {
   eager: true,
@@ -94,24 +51,40 @@ const hobbiesFiles = import.meta.glob<string>("/src/pages/hobbies/*.md", {
   import: "default",
 });
 
-const infoEntries = parseFrontmatter<InfoCard>(infoFiles)
-  .map(toSluggedEntry)
-  .sort(sortBySlug);
-const infoCards = infoEntries.map(({ path: _path, ...entry }) => entry);
+const infoEntries = sortByFrontmatterOrder(
+  parseMarkdownCollection<InfoFrontmatter>(infoFiles, {
+    baseDir: "/src/pages/infos",
+  }),
+);
 
-const profileInfo =
+const infoCards = infoEntries.map(({ data, slug, segments, relativePath }) => ({
+  ...data,
+  slug,
+  segments,
+  relativePath,
+}));
+
+const profileCard =
   infoCards.find((entry) => entry.slug === "profile") ??
   infoCards[0] ?? {
     slug: "profile",
+    segments: ["profile"],
+    relativePath: "profile",
     name: "",
     title: "",
     description: "",
   };
 
-const socialEntries = parseFrontmatter<SocialLink>(socialFiles)
-  .map(toSluggedEntry)
-  .sort(sortBySlug);
-const socialLinks = socialEntries.map(({ path: _path, ...entry }) => entry);
+const socialEntries = sortByFrontmatterOrder(
+  parseMarkdownCollection<SocialFrontmatter>(socialFiles, {
+    baseDir: "/src/pages/social",
+  }),
+);
+
+const socialLinks = socialEntries.map(({ data, slug }) => ({
+  ...data,
+  slug,
+}));
 
 const social = socialLinks.reduce<Record<string, string>>((acc, entry) => {
   if (entry.url) {
@@ -120,26 +93,32 @@ const social = socialLinks.reduce<Record<string, string>>((acc, entry) => {
   return acc;
 }, {});
 
-const skillsEntries = parseFrontmatter<Skill>(skillsFiles);
-const skills = skillsEntries
-  .map(({ path: _path, ...skill }) => skill)
-  .sort((a, b) => a.name.localeCompare(b.name));
+const skillsEntries = sortByFrontmatterOrder(
+  parseMarkdownCollection<SkillFrontmatter>(skillsFiles, {
+    baseDir: "/src/pages/skills",
+  }),
+);
 
-const hobbyEntries = parseFrontmatter<Hobby>(hobbiesFiles)
-  .map(toSluggedEntry)
-  .sort(sortBySlug);
-const hobbyDetails = hobbyEntries.map(({ path: _path, ...entry }) => entry);
+const skills = skillsEntries.map(({ data }) => data);
+
+const hobbyEntries = sortByFrontmatterOrder(
+  parseMarkdownCollection<HobbyFrontmatter>(hobbiesFiles, {
+    baseDir: "/src/pages/hobbies",
+  }),
+);
+
+const hobbyDetails = hobbyEntries.map(({ data, slug }) => ({
+  ...data,
+  slug,
+}));
+
 const hobbies = hobbyDetails.map((entry) => entry.title);
 
 export const config = {
-  name: profileInfo.name,
-  title: profileInfo.title,
-  description: profileInfo.description,
-  profile: {
-    name: profileInfo.name,
-    title: profileInfo.title,
-    description: profileInfo.description,
-  },
+  name: profileCard.name,
+  title: profileCard.title,
+  description: profileCard.description,
+  profile: profileCard,
   infos: infoCards,
   social,
   socialLinks,
@@ -411,4 +390,11 @@ export const config = {
   ],
 } as const;
 
+export type InfoCard = (typeof config.infos)[number];
+export type SocialLink = (typeof config.socialLinks)[number];
+export type Skill = (typeof config.skills)[number];
+export type Hobby = (typeof config.hobbyDetails)[number];
+export type Project = (typeof config.projects)[number];
+export type Achievement = (typeof config.achievements)[number];
+export type AchievementType = (typeof config.achievementTypes)[number];
 export type SocialLinks = typeof config.social;
