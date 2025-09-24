@@ -245,7 +245,7 @@ export const config = {
          "Decap CMS",
          "Netlify Identity" 
       ],
-      link: "/projects/how-i-updated-my-portfolio.md"
+      link: "/projects/how-i-updated-my-portfolio"
     },
   ],
   achievements: [
