@@ -1,31 +1,45 @@
+<<<<<<< HEAD
+import { parseMarkdownCollection, sortByFrontmatterOrder } from "./lib/content";
+=======
 import matter from "gray-matter";
+>>>>>>> main
 
 export type SkillLevel = "Beginner" | "Intermediate" | "Advanced" | "A lot";
 
-export type InfoCard = {
+type InfoFrontmatter = {
   name: string;
   title: string;
   description: string;
+  order?: number;
 };
 
-export type SocialLink = {
+type SocialFrontmatter = {
   platform: string;
   url: string;
   username?: string;
   icon?: string;
   featured?: boolean;
+  order?: number;
 };
 
-export type Skill = {
+type SkillFrontmatter = {
   name: string;
   level: SkillLevel;
+  order?: number;
 };
 
+<<<<<<< HEAD
+type HobbyFrontmatter = {
+=======
 export type Hobby = {
+>>>>>>> main
   title: string;
   description?: string;
+  order?: number;
 };
 
+<<<<<<< HEAD
+=======
 export type Project = {
   id: string;
   title: string;
@@ -73,6 +87,7 @@ const toSluggedEntry = <T>(entry: ParsedEntry<T>): SluggedEntry<T> => ({
 const sortBySlug = <T extends { slug: string }>(a: T, b: T) =>
   a.slug.localeCompare(b.slug);
 
+>>>>>>> main
 const infoFiles = import.meta.glob<string>("/src/pages/infos/**/*.md", {
   eager: true,
   query: "?raw",
@@ -94,6 +109,27 @@ const hobbiesFiles = import.meta.glob<string>("/src/pages/hobbies/*.md", {
   import: "default",
 });
 
+<<<<<<< HEAD
+const infoEntries = sortByFrontmatterOrder(
+  parseMarkdownCollection<InfoFrontmatter>(infoFiles, {
+    baseDir: "/src/pages/infos",
+  }),
+);
+
+const infoCards = infoEntries.map(({ data, slug, segments, relativePath }) => ({
+  ...data,
+  slug,
+  segments,
+  relativePath,
+}));
+
+const profileCard =
+  infoCards.find((entry) => entry.slug === "profile") ??
+  infoCards[0] ?? {
+    slug: "profile",
+    segments: ["profile"],
+    relativePath: "profile",
+=======
 const infoEntries = parseFrontmatter<InfoCard>(infoFiles)
   .map(toSluggedEntry)
   .sort(sortBySlug);
@@ -103,15 +139,29 @@ const profileInfo =
   infoCards.find((entry) => entry.slug === "profile") ??
   infoCards[0] ?? {
     slug: "profile",
+>>>>>>> main
     name: "",
     title: "",
     description: "",
   };
 
+<<<<<<< HEAD
+const socialEntries = sortByFrontmatterOrder(
+  parseMarkdownCollection<SocialFrontmatter>(socialFiles, {
+    baseDir: "/src/pages/social",
+  }),
+);
+
+const socialLinks = socialEntries.map(({ data, slug }) => ({
+  ...data,
+  slug,
+}));
+=======
 const socialEntries = parseFrontmatter<SocialLink>(socialFiles)
   .map(toSluggedEntry)
   .sort(sortBySlug);
 const socialLinks = socialEntries.map(({ path: _path, ...entry }) => entry);
+>>>>>>> main
 
 const social = socialLinks.reduce<Record<string, string>>((acc, entry) => {
   if (entry.url) {
@@ -120,6 +170,34 @@ const social = socialLinks.reduce<Record<string, string>>((acc, entry) => {
   return acc;
 }, {});
 
+<<<<<<< HEAD
+const skillsEntries = sortByFrontmatterOrder(
+  parseMarkdownCollection<SkillFrontmatter>(skillsFiles, {
+    baseDir: "/src/pages/skills",
+  }),
+);
+
+const skills = skillsEntries.map(({ data }) => data);
+
+const hobbyEntries = sortByFrontmatterOrder(
+  parseMarkdownCollection<HobbyFrontmatter>(hobbiesFiles, {
+    baseDir: "/src/pages/hobbies",
+  }),
+);
+
+const hobbyDetails = hobbyEntries.map(({ data, slug }) => ({
+  ...data,
+  slug,
+}));
+
+const hobbies = hobbyDetails.map((entry) => entry.title);
+
+export const config = {
+  name: profileCard.name,
+  title: profileCard.title,
+  description: profileCard.description,
+  profile: profileCard,
+=======
 const skillsEntries = parseFrontmatter<Skill>(skillsFiles);
 const skills = skillsEntries
   .map(({ path: _path, ...skill }) => skill)
@@ -140,6 +218,7 @@ export const config = {
     title: profileInfo.title,
     description: profileInfo.description,
   },
+>>>>>>> main
   infos: infoCards,
   social,
   socialLinks,
@@ -411,4 +490,14 @@ export const config = {
   ],
 } as const;
 
+<<<<<<< HEAD
+export type InfoCard = (typeof config.infos)[number];
+export type SocialLink = (typeof config.socialLinks)[number];
+export type Skill = (typeof config.skills)[number];
+export type Hobby = (typeof config.hobbyDetails)[number];
+export type Project = (typeof config.projects)[number];
+export type Achievement = (typeof config.achievements)[number];
+export type AchievementType = (typeof config.achievementTypes)[number];
+=======
+>>>>>>> main
 export type SocialLinks = typeof config.social;

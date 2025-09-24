@@ -53,6 +53,7 @@ collections:
         name: "level"
         widget: "select"
         options: ["Beginner", "Intermediate", "Advanced", "A lot"]
+      - { label: "Order", name: "order", widget: "number", required: false, hint: "Lower numbers appear first" }
 
   # ---- 4) Hobbies ----
   - name: "hobbies"
@@ -66,3 +67,4 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }   # can include emoji
       - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Order", name: "order", widget: "number", required: false, hint: "Lower numbers appear first" }
