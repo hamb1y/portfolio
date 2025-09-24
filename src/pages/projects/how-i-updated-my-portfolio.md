@@ -7,9 +7,10 @@ description: How I migrated my portfolio from having to manually edit config.ts
 technologies:
   - Astro
   - Netlify
-  - DecapCMS
-  - NetlifyIdentity
+  - Decap CMS
+  - Netlify Identity
   - Dynamic
+  - Server/Administration
 link: www.rishimalnad.dev
 ---
 # 1. Issues with previous site:
@@ -31,7 +32,7 @@ I also chose DecapCMS because it's UI was easy to use and simple. Then, I setup 
 > ![Me editing this blog (using Decap CMS)](/images/image-2-.png "Me editing this blog (using Decap CMS)")
 
 A fully functional, headless, dynamic with robust editing and authentication portfolio site, hosted for free on the hosting provider Netlify.
-!image
+
 
 > Another fun fact: In the past 30 days this fully dynamic site was deployed, N?etlify handled 2.54k unique requests for free with ease.
 >
