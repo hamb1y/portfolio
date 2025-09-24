@@ -220,7 +220,6 @@ export const config = {
       link: "/projects/phoneserver-1",
       featured: false,
     },
-
     {
       id: "localai",
       title: "Running local AI models on my laptop",
@@ -235,7 +234,6 @@ export const config = {
       ],
       link: "/projects/localai",
     },
-
     {
       id:"how-i-updated-my-portfolio"
       title: "How I updated My Portfolio"
