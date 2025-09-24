@@ -235,10 +235,10 @@ export const config = {
       link: "/projects/localai",
     },
     {
-      id:"how-i-updated-my-portfolio"
-      title: "How I updated My Portfolio"
+      id:"how-i-updated-my-portfolio",
+      title: "How I updated My Portfolio",
       description:
-        "How I migrated my portfolio from having to manually edit config.ts and add blogs to using DecapCMS for editing, And Netlify Auth for authenthication."
+        "How I migrated my portfolio from having to manually edit config.ts and add blogs to using DecapCMS for editing, And Netlify Auth for authenthication.",
       technologies: [
          "Astro",
          "Netlify",
@@ -246,7 +246,7 @@ export const config = {
          "Netlify Identity" 
       ],
       link: "/projects/how-i-updated-my-portfolio.md"
-    }
+    },
   ],
   achievements: [
     {
