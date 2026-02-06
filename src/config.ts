@@ -148,43 +148,21 @@ export const config = {
   hobbyDetails,
   projects: [
     {
-      id: "orangesmp",
-      title: "OrangeSMP",
-      description:
-        "A heavily modded minecraft server with a custom modpack, with Bedrock Edition support through GeyserMC crossplay and requiring no client-side mods to play!",
-      technologies: [
-        "Java",
-        "Minecraft",
-        "GeyserMC",
-        "Linux",
-        "Server/Enterprise",
-        "Web",
-        "Artifical Intelligence",
-        "JavaScript",
-        "TypeScript",
-        "Astro.js",
-        "Vercel",
-      ],
-      link: "https://orangesmp.rishimalnad.dev",
-      featured: true,
-    },
-    {
       id: "jnvckm-site-v2",
       title: "JNVCKM Site v2",
       description:
-        "The second version of the Jawahar Navodaya Vidyalaya Site using TinaCMS for the blogging system, CommentBox for comment system, Vercel for hosting, Supabase for authenthication, and Astro.js as the JS framework. Uses no databases and if done right can be totally hosted for free!",
+        "The second version of the Jawahar Navodaya Vidyalaya Site using DecapCMS for the blogging system, Netlify & Cloudflare for hosting, and Astro.js as the JS framework (but uses little JS and is very efficient). Uses no databases and if done right can be totally hosted for free!",
       technologies: [
         "Web",
         "Artifical Intelligence",
         "JavaScript",
         "TypeScript",
         "Astro.js",
-        "TinaCMS",
-        "CommentBox",
-        "Vercel",
-        "Supabase",
+        "DecapCMS",
+        "Netlify",
+        "Cloudflare",
       ],
-      link: "https://jnvckm.org",
+      link: "https://jnvckm.netlify.app",
       featured: true,
     },
     {
@@ -201,23 +179,6 @@ export const config = {
         "Vercel",
       ],
       link: "/",
-      featured: false,
-    },
-    {
-      id: "phoneserver-1",
-      title: "Converting old, broken phone to server",
-      description:
-        "I've repurposed my grandmother's old, broken phone to a webserver for use as an FTP endpoint and hosting for the JNVCKM Site v2. To learn more, go to View Project →.",
-      technologies: [
-        "Web",
-        "Artifical Intelligence",
-        "Linux",
-        "Bash",
-        "Python",
-        "Android",
-        "Server/Administration",
-      ],
-      link: "/projects/phoneserver-1",
       featured: false,
     },
     {
@@ -240,13 +201,27 @@ export const config = {
       description:
         "How I migrated my portfolio from having to manually edit config.ts and add blogs to using DecapCMS for editing, And Netlify Auth for authenthication.",
       technologies: [
-         "Astro",
+         "Astro.js",
          "Netlify",
-         "Decap CMS",
+         "DecapCMS",
          "Netlify Identity" 
       ],
       link: "/projects/how-i-updated-my-portfolio"
     },
+    {
+      id:"stem-g8",
+      title:"Stem G8",
+      description:
+        "How I made my Stem G8 school project, and what it's about.",
+      technologies: [
+        "Svelte 5",
+        "Python",
+        "Arduino",
+        "Sensors",
+        "Teamwork"
+      ],
+      link:"/projects/stem-g8"
+    }
   ],
   achievements: [
     {
